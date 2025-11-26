@@ -1,0 +1,89 @@
+import React, { Component } from "react";
+import { Container, Row, Col} from "react-bootstrap";
+
+// const URL = 'https://www.omdbapi.com/?apikey=caefe34f&s=Star%20Wars&type=movie'
+// const dbFilms = []
+
+class TvShows extends Component {
+
+    search=encodeURIComponent(this.props.searchFilm) //convert to URL encoding -> converts spaces to %20
+    URL = `https://www.omdbapi.com/?apikey=caefe34f&s=${this.search}&type=movie`
+    state = {
+    films: [],
+    isLoading: true,
+    error: null,
+  }
+ 
+ filmFetch () {
+        fetch (this.URL)
+        .then ((response) => {
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        throw new Error("Network response was not ok" + response.status)
+                    }   
+                })
+        .then ((data) => {
+            console.log (data.Search)
+            // data.Search.map (film => dbFilms.push (film))
+            this.setState({ films: data.Search, isLoading: false })
+            console.log ('FILM in this.state.films', this.state.films)
+            // console.log ('FILM in dbFilms', dbFilms)
+        })
+        .catch (error => console.error ("Fetch error: ", error))
+    }
+
+    componentDidMount () {
+        this.filmFetch()
+    }
+
+    componentDidUpdate (prevProps) {
+        console.log ('Gallery Updated', this.props.searchFilm, prevProps.searchFilm)
+        if (this.props.searchFilm !== prevProps.searchFilm) {
+            this.filmFetch()
+            prevProps.searchFilm = this.props.searchFilm
+        }
+    }
+    
+    render() {
+        
+        const { films } = this.state
+
+        return (
+            <>
+                <h4 className="fs-4 text-white mb-0 mt-4">{this.props.galleryTitle}</h4>
+                {/* <Carousel>
+                    {films.map (film => (
+                        <CarouselItem key={film.imdbID}>
+                            <img src={film.Poster} alt={film.Title} />
+                        </CarouselItem>
+                    ))}
+                </Carousel> */}
+                <Container fluid={true} className="p-4">
+                    <Row justify='center' space="around" className="d-flex flex-grow-1 overflow-hidden">
+                        <Col xs={2}>
+                            {films[0] && <img src={films[0].Poster} alt={films[0].Title} className="img-fluid rounded-2 me-2 mb-0 w-75"/>}
+                        </Col>
+                        <Col xs={2}>
+                            {films[1] && <img src={films[1].Poster} alt={films[1].Title} className="img-fluid rounded-2 me-2 mb-2 w-75"/>}
+                        </Col>
+                        <Col xs={2}>
+                            {films[2] && <img src={films[2].Poster} alt={films[2].Title} className="img-fluid rounded-2 me-2 mb-2 w-75"/>}
+                        </Col>
+                        <Col xs={2}>    
+                            {films[3] && <img src={films[3].Poster} alt={films[3].Title} className="img-fluid rounded-2 me-2 mb-2 w-75"/>}
+                        </Col>
+                        <Col xs={2}>
+                            {films[4] && <img src={films[4].Poster} alt={films[4].Title} className="img-fluid rounded-2 me-2 mb-2 w-75"/>}
+                        </Col>
+                        <Col xs={2}>
+                            {films[5] && <img src={films[5].Poster} alt={films[5].Title} className="img-fluid rounded-2 me-2 mb-2 w-75"/>}
+                        </Col>
+                    </Row>
+                </Container>
+            </>
+        )
+    }
+}
+
+export default TvShows

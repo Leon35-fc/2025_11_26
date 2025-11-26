@@ -1,5 +1,7 @@
 import {Container, Nav, Navbar, Row, Col} from 'react-bootstrap'
 import logo from '../assets/logo.png'
+import { Link} from 'react-router-dom'
+
 
 function MyNavbar() {
   return (
@@ -11,8 +13,8 @@ function MyNavbar() {
         </Col>
         <Col xs={10}>
           <Nav className="me-auto fw-bold">
-            <Nav.Link href="#home" active>Home</Nav.Link>
-            <Nav.Link href="#tvshows">TV Shows</Nav.Link>
+            <Link to="/" className='nav-link' active>Home</Link>
+            <Link to="tv-shows" className='nav-link'>TV Shows</Link>
             <Nav.Link href="#movies">Movies</Nav.Link>
             <Nav.Link href="#recently">Recently Added</Nav.Link>
             <Nav.Link href="#mylist">My List</Nav.Link>
