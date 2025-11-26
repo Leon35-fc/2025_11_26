@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col} from "react-bootstrap";
+// import { useNavigate } from "react-router-dom";
+import MovieDetails from "./MovieDetails.jsx";
 
 // const URL = 'https://www.omdbapi.com/?apikey=caefe34f&s=Star%20Wars&type=movie'
 // const dbFilms = []
@@ -62,7 +64,9 @@ class TvShows extends Component {
                 <Container fluid={true} className="p-4">
                     <Row justify='center' space="around" className="d-flex flex-grow-1 overflow-hidden">
                         <Col xs={2}>
-                            {films[0] && <img src={films[0].Poster} alt={films[0].Title} className="img-fluid rounded-2 me-2 mb-0 w-75"/>}
+                            <button onClick=''>
+                                {films[0] && <img src={films[0].Poster} alt={films[0].Title} className="img-fluid rounded-2 me-2 mb-0 w-75"/>}
+                            </button>
                         </Col>
                         <Col xs={2}>
                             {films[1] && <img src={films[1].Poster} alt={films[1].Title} className="img-fluid rounded-2 me-2 mb-2 w-75"/>}
@@ -81,6 +85,7 @@ class TvShows extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <MovieDetails/>
             </>
         )
     }

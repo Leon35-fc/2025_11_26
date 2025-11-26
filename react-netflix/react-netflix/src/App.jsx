@@ -16,7 +16,6 @@ function App() {
         <MyNavbar/>
         <Routes>
           <Route path='/tv-shows' element={<TvShows galleryTitle="TvShows" searchFilm="Breaking Bad"/>}/>
-          {/* <Route path='/movie-details' element={<MovieDetails/>}/> */}
           <Route path='/' element={<ContainerGallery/>}/>
         </Routes>
         <Footer/>
