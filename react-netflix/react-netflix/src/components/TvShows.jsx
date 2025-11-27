@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col} from "react-bootstrap";
 // import { useNavigate } from "react-router-dom";
 import MovieDetails from "./MovieDetails.jsx";
+import { Link } from "react-router-dom";
 
 // const URL = 'https://www.omdbapi.com/?apikey=caefe34f&s=Star%20Wars&type=movie'
 // const dbFilms = []
@@ -9,11 +10,12 @@ import MovieDetails from "./MovieDetails.jsx";
 class TvShows extends Component {
 
     search=encodeURIComponent(this.props.searchFilm) //convert to URL encoding -> converts spaces to %20
-    URL = `https://www.omdbapi.com/?apikey=caefe34f&s=${this.search}&type=movie`
+    // URL = `https://www.omdbapi.com/?apikey=caefe34f&s=${this.search}&type=movie`
+    URL = 'https://www.omdbapi.com/?apikey=caefe34f&s=Breaking%20Bad'
     state = {
     films: [],
-    isLoading: true,
-    error: null,
+    isLoading: 'true',
+    error: 'null',
   }
  
  filmFetch () {
@@ -26,7 +28,7 @@ class TvShows extends Component {
                     }   
                 })
         .then ((data) => {
-            console.log (data.Search)
+            console.log ('DATI DAL .JSON DELLA FETCH', data.Search)
             // data.Search.map (film => dbFilms.push (film))
             this.setState({ films: data.Search, isLoading: false })
             console.log ('FILM in this.state.films', this.state.films)
@@ -64,9 +66,9 @@ class TvShows extends Component {
                 <Container fluid={true} className="p-4">
                     <Row justify='center' space="around" className="d-flex flex-grow-1 overflow-hidden">
                         <Col xs={2}>
-                            <button onClick=''>
+                            <Link to='/details/tt0903747'>
                                 {films[0] && <img src={films[0].Poster} alt={films[0].Title} className="img-fluid rounded-2 me-2 mb-0 w-75"/>}
-                            </button>
+                            </Link>
                         </Col>
                         <Col xs={2}>
                             {films[1] && <img src={films[1].Poster} alt={films[1].Title} className="img-fluid rounded-2 me-2 mb-2 w-75"/>}
@@ -85,7 +87,6 @@ class TvShows extends Component {
                         </Col>
                     </Row>
                 </Container>
-                <MovieDetails/>
             </>
         )
     }

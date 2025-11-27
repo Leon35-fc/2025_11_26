@@ -10,8 +10,8 @@ class Gallery extends Component {
     URL = `https://www.omdbapi.com/?apikey=caefe34f&s=${this.search}&type=movie`
     state = {
     films: [],
-    isLoading: true,
-    error: null,
+    isLoading: 'true',
+    error: 'null',
   }
  
  filmFetch () {

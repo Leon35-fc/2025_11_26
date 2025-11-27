@@ -2,8 +2,10 @@
 
 .navbar, 
 footer,
-main{
+main,
+body {
     background-color: #221f1f;
+    --bs-body-bg: #221f1f;
 }
 
 i{
